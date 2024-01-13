@@ -134,7 +134,9 @@ echo -e "\n\nInstalling wkhtmltopdf...\n\n"
 #sudo rm wkhtml.deb
 sudo apt-get -y install wkhtmltopdf
 
+echo "debugging script - C"
 if [ ! "$dependonly" = "1" ]; then
+echo "debugging script - Cb"
 
   # Enable display_errors and error logging for PHP, plus configure timezone
   sudo mkdir /var/log/php 2>/dev/null || :
@@ -161,6 +163,7 @@ if [ ! "$dependonly" = "1" ]; then
   # source /vagrant/install/bashrc
 
   # Bind mysql to accept connections from remote servers (only if mysql is locally installed)
+  echo "debugging script - E"
   if [ "$OE_INSTALL_LOCAL_DB" == "TRUE" ]; then
     sudo sed -i "s/\s*bind-address\s*=\s*127\.0\.0\.1/bind-address    = 0.0.0.0/" /etc/mysql/my.cnf
     sudo sed -i "s/\s*bind-address\s*=\s*127\.0\.0\.1/bind-address    = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -175,6 +178,7 @@ if [ ! "$dependonly" = "1" ]; then
 fi
 
 # Install php composer if we are not in live mode (not needed in production environments)
+echo "debugging script - D"
 if [ "$OE_MODE" != "LIVE" ]; then
   sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   sudo php composer-setup.php
