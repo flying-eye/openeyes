@@ -136,10 +136,11 @@ sudo apt-get -y install wkhtmltopdf
 
 echo "debugging script - C"
 if [ ! "$dependonly" = "1" ]; then
-echo "debugging script - Cb"
+  echo "debugging script - Ca"
 
   # Enable display_errors and error logging for PHP, plus configure timezone
   sudo mkdir /var/log/php 2>/dev/null || :
+  echo "debugging script - Cb"
   sudo chown www-data /var/log/php
   sudo chown www-data /var/log/php
   sudo sed -i "s/^display_errors = Off/display_errors = On/" /etc/php/5.6/apache2/php.ini
@@ -151,19 +152,22 @@ echo "debugging script - Cb"
   sudo sed -i "s/;error_log = php_errors.log/error_log = \/var\/log\/php_errors.log/" /etc/php/5.6/cli/php.ini
   sudo sed -i "s|^;date.timezone =|date.timezone = ${TZ:-'Europe/London'}|" /etc/php/5.6/cli/php.ini
 
+  echo "debugging script - Cc"
   TZ_SET=$(sudo timedatectl set-timezone ${TZ:-'Europe/London'})
 
   if [ ! "$TZ_SET" ]; then
     sudo ln -sf /usr/share/zoneinfo/${TZ:-Europe/London} /etc/localtime
   fi
 
+  echo "debugging script - Cd"
   sudo a2enmod rewrite
+  echo "debugging script - Ce"
   ## TODO: Decide a clen way to add bash environment 'fixes'
   # cp /vagrant/install/bashrc /etc/bash.bashrc
   # source /vagrant/install/bashrc
 
   # Bind mysql to accept connections from remote servers (only if mysql is locally installed)
-  echo "debugging script - E"
+  echo "debugging script - Cf"
   if [ "$OE_INSTALL_LOCAL_DB" == "TRUE" ]; then
     sudo sed -i "s/\s*bind-address\s*=\s*127\.0\.0\.1/bind-address    = 0.0.0.0/" /etc/mysql/my.cnf
     sudo sed -i "s/\s*bind-address\s*=\s*127\.0\.0\.1/bind-address    = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
