@@ -70,7 +70,7 @@ sudo sysctl vm.swappiness=10
 # update system packages
 sudo apt-get update
 # workaround grub-pc upgrade not working in noninteractive mode (this can be removed once the issue with the upstream package has been resolved)
-sudo apt-mark hold grub-pc
+#sudo apt-mark hold grub-pc
 sudo apt-get upgrade -y
 sudo apt-get install -y software-properties-common
 
@@ -123,6 +123,10 @@ elif [[ "$osver" == "16.04" ]]; then
 elif [[ "$osver" == "18.04" ]]; then
   # Ubuntu 18.04
   sudo wget -O wkhtml.deb https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+elif [[ "$osver" == "22.04" ]]; then
+  # Ubuntu 22.04
+  sudo apt install wget
+  sudo wget -O wkhtml.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 fi
 ## TODO: replace with package manager. e.g, https://packagist.org/packages/h4cc/wkhtmltopdf-amd64 and https://packagist.org/packages/h4cc/wkhtmltoimage-amd64
 sudo dpkg -i --force-depends wkhtml.deb || echo -e "\n\nWARNING WARNING WARNING:\n\nUnable to install wkhtmltopdf automatically\nPlease install manually"
