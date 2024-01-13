@@ -73,6 +73,7 @@ sudo apt-get update
 #sudo apt-mark hold grub-pc
 sudo apt-get upgrade -y
 sudo apt-get install -y software-properties-common
+sudo apt install -y apt-utils
 
 #add repos for PHP5.6 and Java7
 sudo add-apt-repository ppa:ondrej/php -y
