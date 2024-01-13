@@ -13,7 +13,7 @@
 
 ## OpenEyes operating mode. Use LIVE for production environments
 ## DEV will install development tools and show more meaningful error messages
-# export OE_MODE="LIVE" ## DEV, LIVE, BUILD
+export OE_MODE="LIVE" ## DEV, LIVE, BUILD
 
 ## Controls the git organisation that the helper scripts will pull updates from
 ## Default is OpenEyes for latest code, but use AppertaFoundation for Gold
