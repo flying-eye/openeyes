@@ -153,7 +153,7 @@ if [ ! "$dependonly" = "1" ]; then
   sudo sed -i "s|^;date.timezone =|date.timezone = ${TZ:-'Europe/London'}|" /etc/php/5.6/cli/php.ini
 
   echo "debugging script - Cc"
-  TZ_SET=$(sudo timedatectl set-timezone ${TZ:-'Europe/London'})
+  #TZ_SET=$(sudo timedatectl set-timezone ${TZ:-'Europe/London'})
 
   if [ ! "$TZ_SET" ]; then
     sudo ln -sf /usr/share/zoneinfo/${TZ:-Europe/London} /etc/localtime
